@@ -3,8 +3,7 @@ var player;
 
 var cursors;
 
-var score = 0;
-var scoreText;
+var dialogText;
 
 var preload = function() {
   game.load.spritesheet('girl', 'assets/sprites/player/character_texture.png', 140, 178, 33);
@@ -41,6 +40,8 @@ var create = function() {
   player.animations.add('run', [12, 13, 14, 15, 16, 17, 18, 19], 30, true);
   player.animations.add('jumpUp', [32], 1, true);
 
+  dialogText = game.add.text(16, 16, "Hi, I'm purple", { fontSize: '20px', fill: '#000', backgroundColor: 'white' });
+  game.physics.arcade.enable(dialogText);
 
   cursors = game.input.keyboard.createCursorKeys();
 };
@@ -48,6 +49,8 @@ var create = function() {
 
 var update = function() {
   game.physics.arcade.collide(player, platforms);
+
+  game.physics.arcade.moveToObject(dialogText, player, 100);
 
   player.body.velocity.x = 0;
   
