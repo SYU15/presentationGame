@@ -1,3 +1,4 @@
+
 var platforms;
 var player;
 
@@ -43,12 +44,13 @@ var create = function() {
   dialogText = game.add.text(16, 16, "Hi, I'm purple", { fontSize: '20px', fill: '#000', backgroundColor: 'white' });
   game.physics.arcade.enable(dialogText);
 
+  game.time.events.loop(Phaser.Timer.SECOND * 10, randomText, this);
   cursors = game.input.keyboard.createCursorKeys();
 };
 
-
 var update = function() {
   game.physics.arcade.collide(player, platforms);
+  game.physics.arcade.collide(player, dialogText);
 
   game.physics.arcade.moveToObject(dialogText, player, 100);
 
@@ -73,5 +75,4 @@ var update = function() {
   }
   
 };
-
-var game = new Phaser.Game(1024, 576, Phaser.AUTO, 'canvas', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1024, 576, Phaser.CANVAS, 'canvas', { preload: preload, create: create, update: update });
